@@ -2,6 +2,7 @@ package framework;
 
 import protocol.http.HttpClient;
 import provider.api.HelloService;
+import register.RemoteMapRegister;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -20,7 +21,8 @@ public class ProxyFactory {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 HttpClient httpClient=new HttpClient();
                 Invocation invocation=new Invocation(interfaceClass.getName(),method.getName(),method.getParameterTypes(),args);
-                String result = httpClient.send("localhost",8080,invocation);
+                URL url = RemoteMapRegister.random(interfaceClass.getName());
+                String result = httpClient.send(url.getHostname(),url.getPort(),invocation);
                 return result;
             }
         });

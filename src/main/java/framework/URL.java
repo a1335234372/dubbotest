@@ -1,12 +1,14 @@
 package framework;
 
+import java.io.Serializable;
+
 /**
  * @auther Seele(pansong)
  * @date 2020/4/29 18:29
  * @Meaning:
  */
 
-public class URL {
+public class URL implements Serializable{
 
     private String hostname ;
 
